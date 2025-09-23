@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Win 10min - Focus Timer & App Blocker for iPhone</title>
-    <meta name="description" content="Build your Roman Empire one victory at a time. Block distracting apps, stay focused, and get things done with Win 10min for iOS.">
+    <meta name="description" content="All you need is to win 10 minutes. If you can focus for 10 minutes, you can build your Empire.">
     <meta name="keywords" content="focus timer, pomodoro app, app blocker, screen time, productivity, iOS app, iPhone, concentration, study timer">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Win 10min - Focus Timer & App Blocker">
-    <meta property="og:description" content="Build your Roman Empire one victory at a time. Block distracting apps and stay focused.">
+    <meta property="og:description" content="All you need is to win 10 minutes. If you can focus for 10 minutes, you can build your Empire.">
     <meta property="og:type" content="website">
 
     <style>
@@ -71,31 +71,11 @@
             position: relative;
         }
 
-        .logo {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 2rem;
-            background: linear-gradient(135deg, var(--roman-gold), #9B7F2F);
-            border-radius: 27px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.3);
-            animation: pulse 3s ease-in-out infinite;
-            overflow: hidden;
-            position: relative;
-        }
-
         .logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            padding: 10px;
-        }
-
-        .logo-placeholder {
-            font-size: 3rem;
-            color: var(--marble-black);
+            max-width: 240px;
+            height: auto;
+            margin: 10px auto;
+            display: block;
         }
 
         @keyframes pulse {
@@ -103,7 +83,7 @@
             50% { transform: scale(1.05); }
         }
 
-        h1 {
+        .main-title {
             font-family: 'Cinzel', serif;
             font-size: clamp(2.5rem, 8vw, 4rem);
             font-weight: 900;
@@ -113,7 +93,7 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        .tagline {
+        .subtitle {
             font-size: 1.5rem;
             margin-bottom: 1rem;
             opacity: 0.9;
@@ -122,25 +102,24 @@
 
         .description {
             font-size: 1.1rem;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             opacity: 0.8;
             max-width: 500px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        .app-store-btn {
+        .app-store-button {
             display: inline-block;
-            margin-top: 2rem;
-            transition: all 0.3s ease;
+            margin: 30px auto;
+            transition: transform 0.2s ease;
         }
 
-        .app-store-btn:hover {
-            transform: translateY(-3px);
-            filter: brightness(1.1);
+        .app-store-button:hover {
+            transform: scale(1.05);
         }
 
-        .app-store-btn img {
+        .app-store-button img {
             height: 60px;
             width: auto;
         }
@@ -166,39 +145,38 @@
             font-weight: 900;
         }
 
-        .features-grid {
+        .distractions-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
         }
 
-        .feature {
+        @media (min-width: 768px) {
+            .distractions-grid {
+                grid-template-columns: repeat(3, 1fr);
+                max-width: 600px;
+                margin: 30px auto 0;
+            }
+        }
+
+        .distraction-item {
             text-align: center;
-            padding: 2rem;
+            padding: 1.5rem;
             background: var(--dark-stone);
             border-radius: 12px;
-            transition: transform 0.3s ease;
+            border: 1px solid rgba(212, 175, 55, 0.2);
         }
 
-        .feature:hover {
-            transform: translateY(-5px);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature h3 {
-            color: var(--roman-gold);
+        .distraction-icon {
+            font-size: 2.5rem;
             margin-bottom: 0.5rem;
-            font-size: 1.3rem;
         }
 
-        .feature p {
+        .distraction-name {
+            font-size: 0.9rem;
+            color: var(--parchment);
             opacity: 0.8;
-            font-size: 0.95rem;
         }
 
         /* How it Works */
@@ -210,9 +188,21 @@
         .steps {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            max-width: 800px;
-            margin: 0 auto;
+            gap: 30px;
+            margin: 60px auto;
+            max-width: 1000px;
+        }
+
+        @media (min-width: 768px) {
+            .steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .steps {
+                grid-template-columns: repeat(4, 1fr);
+            }
         }
 
         .step {
@@ -249,7 +239,7 @@
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             max-width: 900px;
-            margin: 0 auto;
+            margin: 0 auto 3rem;
         }
 
         .pricing-card {
@@ -267,7 +257,7 @@
         }
 
         .pricing-card.featured::before {
-            content: 'BEST VALUE';
+            content: 'SAVE 58%';
             position: absolute;
             top: -12px;
             left: 50%;
@@ -298,14 +288,38 @@
             margin-bottom: 1.5rem;
         }
 
-        .feature-list {
-            list-style: none;
-            margin-bottom: 2rem;
+        .premium-features {
+            background: var(--dark-stone);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
         }
 
-        .feature-list li {
-            margin-bottom: 0.5rem;
-            opacity: 0.8;
+        .premium-features h3 {
+            color: var(--roman-gold);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .premium-features ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .premium-features li {
+            padding: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .premium-features li:before {
+            content: "✓ ";
+            color: var(--laurel-green);
+            font-weight: bold;
+            margin-right: 0.5rem;
         }
 
         /* Footer */
@@ -324,16 +338,33 @@
             flex-wrap: wrap;
         }
 
-        .footer-links a {
+        .footer-links a, .footer-link {
             color: var(--parchment);
             text-decoration: none;
             opacity: 0.7;
             transition: opacity 0.3s ease;
         }
 
-        .footer-links a:hover {
+        .footer-links a:hover, .footer-link:hover {
             opacity: 1;
             color: var(--roman-gold);
+        }
+
+        .footer-cta {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--roman-gold);
+            color: var(--marble-black);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-cta:hover {
+            background: #b8941f;
+            transform: translateY(-2px);
         }
 
         .latin-motto {
@@ -358,57 +389,45 @@
             <div class="logo">
                 <img src="roman-character.png" alt="Win 10min Roman Character">
             </div>
-            <h1>WIN 10MIN</h1>
-            <p class="tagline">Build Your Roman Empire</p>
+            <h1 class="main-title">Win 10min</h1>
+            <p class="subtitle">All you need is to win 10 minutes</p>
             <p class="description">
-                Transform your focus into an empire. Block distracting apps, complete focused work sessions,
-                and watch your virtual Roman city grow with each victory.
+                If you can focus for 10 minutes, you can build your Empire. That's it!
             </p>
-            <a href="https://apps.apple.com/app/win-10min/id6752724300" class="app-store-btn">
-                <svg viewBox="0 0 140 48" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="140" height="48" rx="8" fill="black"/>
-                    <path d="M29.24 24.84c-.03-2.88 2.36-4.28 2.47-4.35-1.35-1.97-3.44-2.24-4.18-2.27-1.77-.18-3.47 1.05-4.37 1.05-.91 0-2.3-1.03-3.79-1-1.94.03-3.74 1.14-4.74 2.88-2.04 3.53-.52 8.74 1.45 11.6.98 1.4 2.13 2.97 3.64 2.91 1.47-.06 2.02-.94 3.79-.94 1.76 0 2.27.94 3.81.91 1.58-.03 2.57-1.41 3.52-2.82 1.12-1.62 1.57-3.2 1.59-3.28-.04-.01-3.04-1.16-3.07-4.62l-.12-1.07zm-2.88-8.37c.8-.98 1.35-2.32 1.2-3.67-1.16.05-2.58.78-3.41 1.75-.74.86-1.4 2.25-1.23 3.57 1.3.1 2.63-.66 3.44-1.65z" fill="white"/>
-                    <text x="45" y="20" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="9" fill="white">Download on the</text>
-                    <text x="45" y="35" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="16" font-weight="600" fill="white">App Store</text>
-                </svg>
+            <a href="https://apps.apple.com/br/app/win-10min/id6751601664?l=en-GB" class="app-store-button">
+                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
             </a>
         </div>
     </section>
 
-    <!-- Features -->
+    <!-- Conquered Distractions -->
     <section class="features">
         <div class="container">
-            <h2 class="section-title">CONQUER DISTRACTIONS</h2>
-            <div class="features-grid">
-                <div class="feature">
-                    <div class="feature-icon">⏱️</div>
-                    <h3>Focus Timer</h3>
-                    <p>Set focused work sessions from 10 minutes. Premium users can customize from 5-90 minutes.</p>
+            <h2 class="section-title">CONQUERED DISTRACTIONS</h2>
+            <div class="distractions-grid">
+                <div class="distraction-item">
+                    <div class="distraction-icon">📱</div>
+                    <div class="distraction-name">Instagram</div>
                 </div>
-                <div class="feature">
-                    <div class="feature-icon">🚫</div>
-                    <h3>App Blocker</h3>
-                    <p>Automatically blocks distracting apps during your focus sessions using iOS Screen Time.</p>
+                <div class="distraction-item">
+                    <div class="distraction-icon">🎮</div>
+                    <div class="distraction-name">TikTok</div>
                 </div>
-                <div class="feature">
-                    <div class="feature-icon">🏛️</div>
-                    <h3>Build Your City</h3>
-                    <p>Earn buildings with each completed session. Build your empire from huts to the Colosseum!</p>
+                <div class="distraction-item">
+                    <div class="distraction-icon">💬</div>
+                    <div class="distraction-name">WhatsApp</div>
                 </div>
-                <div class="feature">
-                    <div class="feature-icon">📊</div>
-                    <h3>Track Progress</h3>
-                    <p>Monitor your streaks, total focus time, and success rate. Export detailed stats with Premium.</p>
+                <div class="distraction-item">
+                    <div class="distraction-icon">🐦</div>
+                    <div class="distraction-name">X (Twitter)</div>
                 </div>
-                <div class="feature">
-                    <div class="feature-icon">🏆</div>
-                    <h3>Rank System</h3>
-                    <p>Progress from Plebeian to Emperor as you complete more sessions and expand your empire.</p>
+                <div class="distraction-item">
+                    <div class="distraction-icon">📺</div>
+                    <div class="distraction-name">YouTube</div>
                 </div>
-                <div class="feature">
-                    <div class="feature-icon">🎵</div>
-                    <h3>Focus Music</h3>
-                    <p>Premium users enjoy ambient music designed to enhance concentration during work sessions.</p>
+                <div class="distraction-item">
+                    <div class="distraction-icon">👻</div>
+                    <div class="distraction-name">Snapchat</div>
                 </div>
             </div>
         </div>
@@ -452,41 +471,34 @@
                     <h3 class="plan-name">MONTHLY</h3>
                     <div class="price">$9.99</div>
                     <div class="period">per month</div>
-                    <ul class="feature-list">
-                        <li>✓ Unlimited daily sessions</li>
-                        <li>✓ Custom timer (5-90 min)</li>
-                        <li>✓ Choose apps to block</li>
-                        <li>✓ Premium buildings</li>
-                        <li>✓ Focus music</li>
-                        <li>✓ Export statistics</li>
-                    </ul>
+                    <div class="period">3-day free trial</div>
                 </div>
                 <div class="pricing-card featured">
                     <h3 class="plan-name">YEARLY</h3>
                     <div class="price">$49.99</div>
-                    <div class="period">per year (save 58%)</div>
-                    <ul class="feature-list">
-                        <li>✓ Everything in Monthly</li>
-                        <li>✓ Save $70 per year</li>
-                        <li>✓ Best value option</li>
-                        <li>✓ Priority support</li>
-                        <li>✓ All premium features</li>
-                        <li>✓ Perfect for students</li>
-                    </ul>
+                    <div class="period">per year</div>
+                    <div class="period">3-day free trial</div>
                 </div>
                 <div class="pricing-card">
                     <h3 class="plan-name">LIFETIME</h3>
                     <div class="price">$49.99</div>
                     <div class="period">one-time purchase</div>
-                    <ul class="feature-list">
-                        <li>✓ All premium features</li>
-                        <li>✓ Forever access</li>
-                        <li>✓ No subscriptions</li>
-                        <li>✓ One-time payment</li>
-                        <li>✓ Lifetime updates</li>
-                        <li>✓ Best long-term value</li>
-                    </ul>
+                    <div class="period">Forever access</div>
                 </div>
+            </div>
+
+            <div class="premium-features">
+                <h3>PREMIUM BENEFITS</h3>
+                <ul>
+                    <li>Custom Session Durations (5, 10, 15, 20 minutes)</li>
+                    <li>Custom App Selection (choose which apps to block)</li>
+                    <li>Personal Handle (customize your @username)</li>
+                    <li>City Name Customization</li>
+                    <li>CSV Export (stats and session history)</li>
+                    <li>Legendary Buildings (Colosseum, Pantheon, Circus Maximus)</li>
+                    <li>Focus Music</li>
+                    <li>All Future Features</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -495,11 +507,13 @@
     <footer>
         <div class="container">
             <div class="footer-links">
-                <a href="https://apps.apple.com/app/win-10min/id6752724300">Download App</a>
-                <a href="mailto:support@lfsadigital.com">Contact Support</a>
-                <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Terms of Use</a>
-                <a href="https://lfsadigital.com">Privacy Policy</a>
+                <a href="/terms" class="footer-link">Terms of Use</a>
+                <a href="/privacy" class="footer-link">Privacy Policy</a>
+                <br>
+                <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" class="footer-link" style="font-size: 12px; opacity: 0.7;">Apple Terms</a>
+                <a href="https://lfsadigital.github.io/privacy-policy-10min/privacy-policy" class="footer-link" style="font-size: 12px; opacity: 0.7;">External Privacy</a>
             </div>
+            <a href="https://apps.apple.com/br/app/win-10min/id6751601664?l=en-GB" class="footer-cta">Download App</a>
             <p style="margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;">
                 Win 10min is a focus and productivity app. Requires iOS 16.0 or later.<br>
                 Screen Time permissions required for app blocking functionality.
