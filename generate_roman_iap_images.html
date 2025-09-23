@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Win 10min - Roman IAP Promotional Images</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&display=swap');
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #0d0d0d;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        .canvas-container {
+            display: inline-block;
+            margin: 20px;
+            background: #1a1614;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            border: 2px solid #D4AF37;
+        }
+        canvas {
+            display: block;
+            cursor: pointer;
+        }
+        h2 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            color: #D4AF37;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 2px;
+        }
+        .instructions {
+            background: #1a1614;
+            color: #F5F2EC;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #D4AF37;
+        }
+        .instructions h1 {
+            color: #D4AF37;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 3px;
+        }
+        button {
+            background: #D4AF37;
+            color: #0d0d0d;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 2px;
+        }
+        button:hover {
+            background: #b8941f;
+        }
+    </style>
+</head>
+<body>
+    <div class="instructions">
+        <h1>WIN 10MIN - IAP PROMOTIONAL IMAGES</h1>
+        <p>Roman-themed promotional images matching your app's design. Click each image to download.</p>
+        <button onclick="downloadAll()">DOWNLOAD ALL IMAGES</button>
+    </div>
+
+    <div class="canvas-container">
+        <h2>MONTHLY SUBSCRIPTION</h2>
+        <canvas id="monthly" width="1024" height="1024"></canvas>
+    </div>
+
+    <div class="canvas-container">
+        <h2>YEARLY SUBSCRIPTION</h2>
+        <canvas id="yearly" width="1024" height="1024"></canvas>
+    </div>
+
+    <div class="canvas-container">
+        <h2>LIFETIME PREMIUM</h2>
+        <canvas id="lifetime" width="1024" height="1024"></canvas>
+    </div>
+
+    <script>
+        // Load Cinzel font
+        const fontLink = document.createElement('link');
+        fontLink.href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&display=swap';
+        fontLink.rel = 'stylesheet';
+        document.head.appendChild(fontLink);
+
+        // Wait for font to load
+        document.fonts.ready.then(() => {
+            createAllImages();
+        });
+
+        function createRomanIAPImage(canvasId, title, subtitle, price, badge, features, accentColor) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+
+            // Colors matching app
+            const marbleBlack = '#0d0d0d';
+            const darkStone = '#262220';
+            const romanGold = '#D4AF37';
+            const imperialPurple = '#6B46C1';
+            const laurelGreen = '#4CAF50';
+            const parchment = '#F5F2EC';
+
+            // Background - matching app's marble black
+            ctx.fillStyle = marbleBlack;
+            ctx.fillRect(0, 0, 1024, 1024);
+
+            // Add gradient overlay like in app
+            const gradient = ctx.createLinearGradient(0, 0, 1024, 1024);
+            gradient.addColorStop(0, 'rgba(38, 34, 32, 0.5)');
+            gradient.addColorStop(1, 'rgba(13, 13, 13, 0.9)');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 1024, 1024);
+
+            // Gold border (matching app style)
+            ctx.strokeStyle = romanGold;
+            ctx.lineWidth = 3;
+            ctx.strokeRect(30, 30, 964, 964);
+
+            // Inner decorative border
+            ctx.globalAlpha = 0.3;
+            ctx.strokeStyle = romanGold;
+            ctx.lineWidth = 1;
+            ctx.strokeRect(50, 50, 924, 924);
+            ctx.globalAlpha = 1;
+
+            // Top ribbon/badge if provided
+            if (badge) {
+                ctx.save();
+                // Badge background
+                ctx.fillStyle = accentColor;
+                ctx.beginPath();
+                ctx.moveTo(362, 100);
+                ctx.lineTo(662, 100);
+                ctx.lineTo(682, 150);
+                ctx.lineTo(512, 170);
+                ctx.lineTo(342, 150);
+                ctx.closePath();
+                ctx.fill();
+
+                // Badge text
+                ctx.fillStyle = marbleBlack;
+                ctx.font = 'bold 28px "Cinzel", serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(badge, 512, 140);
+                ctx.restore();
+            }
+
+            // Placeholder for Roman Character image
+            // Since we can't load local images in HTML, show instruction text
+            ctx.fillStyle = romanGold;
+            ctx.font = '16px -apple-system, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('[ Roman Character Image Here ]', 512, 200);
+            ctx.fillText('Add your RomanCharacter.png in image editor', 512, 220);
+
+            // App name
+            ctx.fillStyle = romanGold;
+            ctx.font = '900 64px "Cinzel", serif';
+            ctx.textAlign = 'center';
+            ctx.letterSpacing = '8px';
+            ctx.fillText('WIN 10MIN', 512, 340);
+
+            // Decorative line
+            ctx.strokeStyle = romanGold;
+            ctx.globalAlpha = 0.5;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(312, 370);
+            ctx.lineTo(712, 370);
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+
+            // Title (MONTHLY/YEARLY/LIFETIME)
+            ctx.fillStyle = parchment;
+            ctx.font = 'bold 56px "Cinzel", serif';
+            ctx.fillText(title, 512, 450);
+
+            // Subtitle
+            if (subtitle) {
+                ctx.fillStyle = parchment;
+                ctx.globalAlpha = 0.7;
+                ctx.font = '28px -apple-system, sans-serif';
+                ctx.fillText(subtitle, 512, 490);
+                ctx.globalAlpha = 1;
+            }
+
+            // Price (larger, prominent)
+            ctx.fillStyle = romanGold;
+            ctx.font = 'bold 72px -apple-system, sans-serif';
+            ctx.fillText(price, 512, 580);
+
+            // Premium features section
+            ctx.fillStyle = romanGold;
+            ctx.font = '600 24px "Cinzel", serif';
+            ctx.fillText('PREMIUM BENEFITS', 512, 660);
+
+            // Features list (actual app features)
+            ctx.fillStyle = parchment;
+            ctx.font = '20px -apple-system, sans-serif';
+            ctx.textAlign = 'left';
+
+            const startY = 710;
+            features.forEach((feature, index) => {
+                // Icon
+                ctx.fillStyle = imperialPurple;
+                ctx.font = '18px Arial';
+                ctx.fillText('▸', 240, startY + (index * 35));
+
+                // Feature text
+                ctx.fillStyle = parchment;
+                ctx.font = '20px -apple-system, sans-serif';
+                ctx.fillText(feature, 270, startY + (index * 35));
+            });
+
+            // Bottom Roman motto
+            ctx.fillStyle = romanGold;
+            ctx.globalAlpha = 0.4;
+            ctx.font = 'italic 20px "Cinzel", serif';
+            ctx.textAlign = 'center';
+            ctx.letterSpacing = '3px';
+            ctx.fillText('VENI • VIDI • VICI', 512, 960);
+            ctx.globalAlpha = 1;
+
+            // Make downloadable
+            canvas.onclick = function() {
+                const link = document.createElement('a');
+                link.download = `win10min_${canvasId}_promo.png`;
+                link.href = canvas.toDataURL();
+                link.click();
+            };
+        }
+
+        function createAllImages() {
+            // Monthly features
+            const monthlyFeatures = [
+                'Unlimited Daily Sessions',
+                'Custom Session Duration',
+                'Choose Which Apps to Block',
+                'Personal @username Handle',
+                'Premium Buildings & Music',
+                'Export Stats to CSV'
+            ];
+
+            // Yearly features (same but emphasize savings)
+            const yearlyFeatures = [
+                'Everything in Monthly',
+                'Save 58% vs Monthly',
+                'Unlimited Daily Sessions',
+                'Custom Session Duration',
+                'Choose Which Apps to Block',
+                'Premium Buildings & Music'
+            ];
+
+            // Lifetime features
+            const lifetimeFeatures = [
+                'One-Time Purchase',
+                'Unlimited Daily Sessions',
+                'Custom Session Duration',
+                'Choose Which Apps to Block',
+                'Premium Buildings & Music',
+                'Export Stats to CSV'
+            ];
+
+            // Create the three images
+            createRomanIAPImage(
+                'monthly',
+                'MONTHLY',
+                'Premium Citizenship',
+                '$9.99/month',
+                null,
+                monthlyFeatures,
+                '#D4AF37'
+            );
+
+            createRomanIAPImage(
+                'yearly',
+                'YEARLY',
+                'Best Value',
+                '$49.99/year',
+                'SAVE 58%',
+                yearlyFeatures,
+                '#4CAF50'
+            );
+
+            createRomanIAPImage(
+                'lifetime',
+                'LIFETIME',
+                'One-Time Purchase',
+                '$49.99',
+                'FOREVER',
+                lifetimeFeatures,
+                '#6B46C1'
+            );
+        }
+
+        function downloadAll() {
+            ['monthly', 'yearly', 'lifetime'].forEach(id => {
+                setTimeout(() => {
+                    const canvas = document.getElementById(id);
+                    const link = document.createElement('a');
+                    link.download = `win10min_${id}_promo.png`;
+                    link.href = canvas.toDataURL();
+                    link.click();
+                }, id === 'monthly' ? 0 : id === 'yearly' ? 500 : 1000);
+            });
+        }
+    </script>
+</body>
+</html>
