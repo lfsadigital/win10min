@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Win 10min - Focus Timer & App Blocker for iPhone</title>
+    <meta name="description" content="Build your Roman Empire one victory at a time. Block distracting apps, stay focused, and get things done with Win 10min for iOS.">
+    <meta name="keywords" content="focus timer, pomodoro app, app blocker, screen time, productivity, iOS app, iPhone, concentration, study timer">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Win 10min - Focus Timer & App Blocker">
+    <meta property="og:description" content="Build your Roman Empire one victory at a time. Block distracting apps and stay focused.">
+    <meta property="og:type" content="website">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --marble-black: #0d0d0d;
+            --dark-stone: #262220;
+            --roman-gold: #D4AF37;
+            --imperial-purple: #6B46C1;
+            --parchment: #F5F2EC;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--marble-black);
+            color: var(--parchment);
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--dark-stone) 0%, var(--marble-black) 50%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .hero-content {
+            max-width: 600px;
+            text-align: center;
+            z-index: 2;
+            position: relative;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, var(--roman-gold), #9B7F2F);
+            border-radius: 27px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.3);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 900;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--roman-gold), #FFF5D6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            color: var(--roman-gold);
+        }
+
+        .description {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--roman-gold);
+            color: var(--marble-black);
+            padding: 18px 36px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(212, 175, 55, 0.5);
+            background: #E5C245;
+        }
+
+        .download-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Features */
+        .features {
+            padding: 5rem 2rem;
+            background: var(--marble-black);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--roman-gold);
+            letter-spacing: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem;
+            background: var(--dark-stone);
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature h3 {
+            color: var(--roman-gold);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .feature p {
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        /* How it Works */
+        .how-it-works {
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, var(--marble-black) 0%, var(--dark-stone) 100%);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--roman-gold);
+            color: var(--marble-black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .step h3 {
+            color: var(--roman-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 5rem 2rem;
+            background: var(--marble-black);
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--dark-stone);
+            border: 2px solid var(--roman-gold);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            transform: scale(1.05);
+            border-color: var(--imperial-purple);
+        }
+
+        .pricing-card.featured::before {
+            content: 'BEST VALUE';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--imperial-purple);
+            color: white;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            color: var(--roman-gold);
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--parchment);
+            margin-bottom: 0.5rem;
+        }
+
+        .period {
+            opacity: 0.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            background: var(--dark-stone);
+            text-align: center;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--parchment);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--roman-gold);
+        }
+
+        .latin-motto {
+            color: var(--roman-gold);
+            opacity: 0.5;
+            font-style: italic;
+            margin-top: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="logo">🏛️</div>
+            <h1>WIN 10MIN</h1>
+            <p class="tagline">Build Your Roman Empire</p>
+            <p class="description">
+                Transform your focus into an empire. Block distracting apps, complete focused work sessions,
+                and watch your virtual Roman city grow with each victory.
+            </p>
+            <a href="https://apps.apple.com/app/win-10min/id6752724300" class="download-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                Download on App Store
+            </a>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">CONQUER DISTRACTIONS</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">⏱️</div>
+                    <h3>Focus Timer</h3>
+                    <p>Set focused work sessions from 10 minutes. Premium users can customize from 5-90 minutes.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🚫</div>
+                    <h3>App Blocker</h3>
+                    <p>Automatically blocks distracting apps during your focus sessions using iOS Screen Time.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🏛️</div>
+                    <h3>Build Your City</h3>
+                    <p>Earn buildings with each completed session. Build your empire from huts to the Colosseum!</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <h3>Track Progress</h3>
+                    <p>Monitor your streaks, total focus time, and success rate. Export detailed stats with Premium.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Rank System</h3>
+                    <p>Progress from Plebeian to Emperor as you complete more sessions and expand your empire.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎵</div>
+                    <h3>Focus Music</h3>
+                    <p>Premium users enjoy ambient music designed to enhance concentration during work sessions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">HOW IT WORKS</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Set Your Task</h3>
+                    <p>Choose what you want to work on</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Start Timer</h3>
+                    <p>Apps automatically block when you begin</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Stay Focused</h3>
+                    <p>Work without distractions until timer ends</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Build Empire</h3>
+                    <p>Earn a building for your Roman city</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing">
+        <div class="container">
+            <h2 class="section-title">PREMIUM CITIZENSHIP</h2>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3 class="plan-name">MONTHLY</h3>
+                    <div class="price">$9.99</div>
+                    <div class="period">per month</div>
+                    <ul class="feature-list">
+                        <li>✓ Unlimited daily sessions</li>
+                        <li>✓ Custom timer (5-90 min)</li>
+                        <li>✓ Choose apps to block</li>
+                        <li>✓ Premium buildings</li>
+                        <li>✓ Focus music</li>
+                        <li>✓ Export statistics</li>
+                    </ul>
+                </div>
+                <div class="pricing-card featured">
+                    <h3 class="plan-name">YEARLY</h3>
+                    <div class="price">$49.99</div>
+                    <div class="period">per year (save 58%)</div>
+                    <ul class="feature-list">
+                        <li>✓ Everything in Monthly</li>
+                        <li>✓ Save $70 per year</li>
+                        <li>✓ Best value option</li>
+                        <li>✓ Priority support</li>
+                        <li>✓ All premium features</li>
+                        <li>✓ Perfect for students</li>
+                    </ul>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="plan-name">LIFETIME</h3>
+                    <div class="price">$49.99</div>
+                    <div class="period">one-time purchase</div>
+                    <ul class="feature-list">
+                        <li>✓ All premium features</li>
+                        <li>✓ Forever access</li>
+                        <li>✓ No subscriptions</li>
+                        <li>✓ One-time payment</li>
+                        <li>✓ Lifetime updates</li>
+                        <li>✓ Best long-term value</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://apps.apple.com/app/win-10min/id6752724300">Download</a>
+                <a href="mailto:support@lfsadigital.com">Support</a>
+                <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Terms</a>
+                <a href="https://lfsadigital.com/privacy">Privacy</a>
+            </div>
+            <p>&copy; 2024 LFSA DIGITAL LLC. All rights reserved.</p>
+            <p class="latin-motto">VENI · VIDI · VICI</p>
+        </div>
+    </footer>
+</body>
+</html>
