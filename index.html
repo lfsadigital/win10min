@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
   <html lang="en">
   <head>
       <meta charset="UTF-8">
@@ -134,8 +134,31 @@
               display: flex;
               gap: 20px;
               overflow-x: auto;
+              overflow-y: hidden;
               padding: 20px 0;
               scroll-snap-type: x mandatory;
+              -webkit-overflow-scrolling: touch;
+              scrollbar-width: thin;
+              scrollbar-color: var(--roman-gold) var(--dark-stone);
+          }
+
+          /* Custom scrollbar for webkit browsers */
+          .screenshots-grid::-webkit-scrollbar {
+              height: 8px;
+          }
+
+          .screenshots-grid::-webkit-scrollbar-track {
+              background: var(--dark-stone);
+              border-radius: 4px;
+          }
+
+          .screenshots-grid::-webkit-scrollbar-thumb {
+              background: var(--roman-gold);
+              border-radius: 4px;
+          }
+
+          .screenshots-grid::-webkit-scrollbar-thumb:hover {
+              background: #b8941f;
           }
 
           .screenshot-item {
@@ -156,21 +179,32 @@
               transform: scale(1.05);
           }
 
-          @media (min-width: 768px) {
-              .screenshots-grid {
-                  justify-content: center;
-                  flex-wrap: wrap;
-                  overflow-x: visible;
-              }
+          /* Scroll hint - appears on larger screens */
+          .screenshots::after {
+              content: '← Scroll to see more →';
+              display: block;
+              text-align: center;
+              color: var(--roman-gold);
+              opacity: 0.6;
+              font-size: 0.9rem;
+              margin-top: 1rem;
+              animation: fadeInOut 2s ease-in-out infinite;
+          }
 
+          @keyframes fadeInOut {
+              0%, 100% { opacity: 0.6; }
+              50% { opacity: 0.3; }
+          }
+
+          @media (min-width: 768px) {
               .screenshot-item img {
-                  width: 220px;
+                  width: 280px;
               }
           }
 
-          @media (min-width: 1400px) {
+          @media (min-width: 1024px) {
               .screenshot-item img {
-                  width: 180px;
+                  width: 300px;
               }
           }
 
