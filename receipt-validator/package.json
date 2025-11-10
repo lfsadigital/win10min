@@ -1,0 +1,13 @@
+{
+  "name": "pandaapp-receipt-validator",
+  "version": "1.0.0",
+  "description": "Temporary receipt validation endpoint for PandaApp",
+  "main": "api/validate.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "keywords": ["receipt", "validation", "app-store"],
+  "author": "Luiz Felipe",
+  "license": "MIT"
+}

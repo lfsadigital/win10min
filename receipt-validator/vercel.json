@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "name": "pandaapp-receipt-validator",
+  "builds": [
+    {
+      "src": "api/validate.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/validate",
+      "dest": "api/validate.js"
+    }
+  ]
+}
