@@ -404,6 +404,60 @@
               margin-right: 0.5rem;
           }
 
+          /* Support Section */
+          .support {
+              padding: 5rem 2rem;
+              background: linear-gradient(180deg, var(--marble-black) 0%, var(--dark-stone) 100%);
+          }
+
+          .support-content {
+              max-width: 800px;
+              margin: 0 auto;
+              text-align: center;
+          }
+
+          .support-email {
+              display: inline-block;
+              margin: 2rem 0;
+              padding: 1rem 2rem;
+              background: var(--roman-gold);
+              color: var(--marble-black);
+              text-decoration: none;
+              border-radius: 8px;
+              font-weight: bold;
+              font-size: 1.1rem;
+              transition: all 0.3s ease;
+          }
+
+          .support-email:hover {
+              background: #b8941f;
+              transform: translateY(-2px);
+          }
+
+          .faq {
+              margin-top: 3rem;
+              text-align: left;
+          }
+
+          .faq-item {
+              background: var(--marble-black);
+              border: 1px solid rgba(212, 175, 55, 0.3);
+              border-radius: 8px;
+              padding: 1.5rem;
+              margin-bottom: 1rem;
+          }
+
+          .faq-item h4 {
+              color: var(--roman-gold);
+              margin-bottom: 0.5rem;
+              font-size: 1.1rem;
+          }
+
+          .faq-item p {
+              opacity: 0.8;
+              font-size: 0.95rem;
+          }
+
           /* Footer */
           footer {
               padding: 3rem 2rem;
@@ -579,12 +633,56 @@
           </div>
       </section>
 
+      <!-- Support Section -->
+      <section class="support" id="support">
+          <div class="container">
+              <h2 class="section-title">SUPPORT</h2>
+              <div class="support-content">
+                  <p style="opacity: 0.9; font-size: 1.1rem; margin-bottom: 1rem;">
+                      Need help? Have questions? We're here for you.
+                  </p>
+                  <a href="mailto:support@win10minutes.app" class="support-email">
+                      ✉️ support@win10minutes.app
+                  </a>
+                  <p style="opacity: 0.7; font-size: 0.9rem;">
+                      We typically respond within 24 hours.
+                  </p>
+
+                  <div class="faq">
+                      <h3 style="color: var(--roman-gold); text-align: center; margin-bottom: 1.5rem;">Frequently Asked Questions</h3>
+
+                      <div class="faq-item">
+                          <h4>How does app blocking work?</h4>
+                          <p>Win 10min uses Apple's Screen Time API to block distracting apps during your focus sessions. You'll need to grant Screen Time permission when you
+   first start a session.</p>
+                      </div>
+
+                      <div class="faq-item">
+                          <h4>Can I choose which apps to block?</h4>
+                          <p>Free users block all non-system apps by default. Premium users can customize exactly which apps to block during sessions.</p>
+                      </div>
+
+                      <div class="faq-item">
+                          <h4>How do I restore my purchase?</h4>
+                          <p>Go to Settings in the app and tap "Restore Purchases". Make sure you're signed in with the same Apple ID you used to purchase.</p>
+                      </div>
+
+                      <div class="faq-item">
+                          <h4>How do I cancel my subscription?</h4>
+                          <p>Subscriptions are managed through Apple. Go to Settings → Your Name → Subscriptions on your iPhone to manage or cancel.</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
       <!-- Footer -->
       <footer>
           <div class="container">
               <div class="footer-links">
                   <a href="/terms" class="footer-link">Terms of Use</a>
                   <a href="/privacy" class="footer-link">Privacy Policy</a>
+                  <a href="#support" class="footer-link">Support</a>
                   <br>
                   <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" class="footer-link" style="font-size: 12px; opacity: 0.7;">Apple Terms</a>
                   <a href="https://lfsadigital.github.io/privacy-policy-10min/privacy-policy" class="footer-link" style="font-size: 12px; opacity: 0.7;">External Privacy</a>
