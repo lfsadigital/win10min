@@ -1,0 +1,438 @@
+╔════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║                         SFS SCHEDULING SYSTEM - COMPLETE STATE FLOW ANALYSIS                              ║
+║                                      (What's Broken vs What Works)                                         ║
+╚════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
+
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+PHASE 1: USER SCHEDULES SFS (Works Correctly ✅)
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ User: "I want to do task X at 2:00 PM"                              │
+│ Creates SFS, sets start time to 2:00 PM                             │
+│ Taps "Schedule for Later"                                           │
+└──────────────────────┬──────────────────────────────────────────────┘
+
+         ┌───────────────────────┬───────────────────────┐
+         ▼                       ▼                       ▼
+    ✅ SESSION          ✅ NOTIFICATION         ✅ DEVICE ACTIVITY
+    CREATED            SCHEDULED               SCHEDULE CREATED
+         │                       │                       │
+         ├──────────┬────────────┤                       │
+         ▼          ▼            ▼                       ▼
+    SFSManager  SFSManager    notify()            extension monitors
+    .activeSession=nil        registerUserNotif   interval start at 2:00 PM
+    .isSessionActive=false    ication alerts
+         │          │
+         └──┬───────┘
+            ▼
+    ✅ SAVED TO FILE
+    sfsScheduledSessions.json
+    ├─ id: ABC-123
+    ├─ tasks: 2
+    ├─ startTime: 2:00 PM
+    └─ totalDuration: 30 min
+
+    UI: "SCHEDULED SFS - Starting in 2h 15m"
+    ✅ Correctly shown in SFS tab
+
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+PHASE 2: SCHEDULED TIME ARRIVES - 2:00 PM (Works Correctly ✅)
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+System: "It's 2:00 PM - SFS should start"
+
+┌────────────────────────────────────────────────┐
+│ Extension: intervalDidStart(activity) fires    │
+│ RUNS IN BACKGROUND (main app may be killed)    │
+└──────────────────────┬─────────────────────────┘
+
+         ┌──────────────────────────────────────────────────┐
+         ▼                                                  ▼
+    ✅ LOAD SCHEDULED             ✅ LOAD BLOCKED APPS
+    SESSION                       FROM APP GROUP
+    From: sfsScheduledSessions.json
+    Returns: ABC-123 session
+         │
+         ├─────────────────────────┐
+         ▼                         ▼
+    ✅ PROMOTE TO ACTIVE      ✅ SAVE BLOCKED APPS
+    Save to: sfsActiveSession.json  to ManagedSettings
+    Sets:                          shields.applications = [blocked apps]
+    ├─ activeSession = [session data]
+    ├─ sessionStartTime = 2:00 PM
+    └─ currentTaskIndex = 0
+         │
+         ▼
+    ✅ REMOVE FROM SCHEDULED
+    Delete: sfsScheduledSessions.json
+    (File is now empty or missing)
+         │
+         ├─ logger: "✅ SFS: Found scheduled session, promoting to active: ABC-123"
+         ├─ logger: "🚀 SFS: Scheduled session activated successfully"
+         └─ logger: "🚫 SFS: Applying app shields (blocking apps)"
+         │
+         ▼
+    ✅ APPLY SHIELDS
+    ManagedSettings store.shield.applications = [blocked apps]
+    
+    RESULT AT 2:00 PM:
+    └─ Apps ARE being blocked ✅✅✅
+       (USER DOESN'T KNOW - no UI feedback yet)
+
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+PHASE 3: USER OPENS APP AT 2:05 PM - WHERE EVERYTHING BREAKS ❌
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+┌──────────────────────────────────────────────────────────┐
+│ User brings app to foreground at 2:05 PM                 │
+│ (Session has been blocking for 5 minutes)                │
+│ Opens Focus tab expecting to see active SFS              │
+└──────────────────────┬─────────────────────────────────┘
+
+         ┌─────────────────────────────────────────────────┐
+         ▼                                                 ▼
+    ✅ SFSMANAGER INIT          ✅ MAIN APP LOADS
+    SFSManager.__init__()       from fresh start
+         │
+         ├─ Load activeSession from sfsActiveSession.json
+         │  Result: ABC-123 session found ✅
+         │  activeSession = [session data]
+         │  isSessionActive = true ✅
+         │
+         ├─ Load scheduledSessions from sfsScheduledSessions.json
+         │  Result: EMPTY (extension deleted it) ✅
+         │  scheduledSessions = []
+         │
+         └─ Initialization COMPLETE
+            State CORRECT:
+            ├─ activeSession = ABC-123 ✅
+            ├─ isSessionActive = true ✅
+            └─ scheduledSessions = [] ✅
+
+
+         ▼─────────────────────────────────────────────────┐
+    ❌ ROMANTIMERVIEW RENDERS                             │
+    Tries to display SFS session                          │
+         │                                                 │
+         ├─ Checks: sfsManager.isSessionActive?            │
+         │  Answer: YES ✅                                │
+         │                                                 │
+         ├─ Checks: sfsManager.activeSession?              │
+         │  Answer: YES (ABC-123) ✅                      │
+         │                                                 │
+         └─ Should display active session countdown        │
+            (2:05 PM / 2:00 PM + 30 min = 25 min remaining)
+
+
+    ❌ SCHEDULEDSFSSLISTVIEW RENDERS (in SFS tab)
+    Tries to display SFS list
+         │
+         └─ displaySessions computed property runs:
+            │
+            ├─ Check active session?
+            │  │ if let active = sfsManager.activeSession     (YES, ABC-123)
+            │  │ if isSessionActive(active)                   
+            │  │    → checks: Date() >= active.startTime?
+            │  │    → 2:05 PM >= 2:00 PM? YES ✅
+            │  │ → Should add to sessions array ✅
+            │  │
+            │  └─ sessions.append(active) ✅
+            │
+            ├─ Check future sessions?
+            │  │ filter scheduledSessions where Date() < startTime
+            │  │ scheduledSessions = []
+            │  │ Result: NO future sessions ✓
+            │
+            └─ Return sessions = [ABC-123] ✅
+               LOGIC CORRECT ✅
+
+
+    ✅ VIEW SHOULD DISPLAY:
+    ┌──────────────────────────────────────────┐
+    │ 🏛️ SUPER FOCUS SESSION                   │
+    │ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ │
+    │ ✓ ACTIVE NOW        2:05:00 remaining  │
+    │                                          │
+    │ ⏱ Total: 30m                            │
+    │ ✓ Tasks: 2                              │
+    │  1. Task A - 15m                        │
+    │  2. Task B - 15m                        │
+    │                                          │
+    │ [TAKE BREAK]  [STOP SESSION]            │
+    └──────────────────────────────────────────┘
+
+
+    ✅ EXPECTED: SFS countdown visible
+    ✅ EXPECTED: User can take breaks
+    ✅ EXPECTED: User can stop session
+    ✅ EXPECTED: Cannot create new SFS (blocked)
+
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+BUT HERE'S WHAT ACTUALLY HAPPENS - THE SIX BUGS
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+BUG #1: SESSION DISAPPEARS FROM LIST ❌
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+    ❌ OBSERVABLE: Session not shown in SFS list at all
+    ✅ ACTUAL STATE: activeSession=ABC-123, isSessionActive=true
+    ✅ ACTUAL BLOCKING: Apps ARE being blocked
+
+    ROOT CAUSE:
+    While logic looks correct above, in practice:
+    ├─ displaySessions is called ONLY during view render
+    ├─ But view may not be rendering the full list properly
+    ├─ OR the isSessionActive helper has a subtle bug
+    │  (checking scheduledStartTime instead of checking activeSession ID)
+    └─ Session gets filtered out or not displayed
+
+    FILES INVOLVED:
+    └─ /ScheduledSFSListView.swift:48-72
+
+
+BUG #2: BLOCKING NOT SHOWING AT FIRST ❌
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+    ✅ ACTUAL: Apps ARE blocked
+    ❌ OBSERVABLE: No UI showing the active SFS
+    
+    ROOT CAUSE:
+    ├─ Extension correctly blocks apps in background
+    ├─ Main app loads activeSession correctly
+    ├─ BUT: RomanTimerView doesn't display it
+    │  (may be in wrong tab, or computed property fails)
+    └─ User thinks blocking failed
+
+    REASON: BUG #1 (session not displayed in list)
+
+
+BUG #3: BLOCKING APPEARS DELAYED ❌
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+    ✅ ACTUAL: Blocking happens at 2:00 PM (immediately)
+    ❌ APPEARANCE: Looks delayed to user
+    
+    ROOT CAUSE:
+    ├─ User opens app at 2:05 PM
+    ├─ Extension has already blocked (but user doesn't know)
+    ├─ User doesn't see SFS UI (BUG #1)
+    ├─ User opens an app and gets blocked
+    ├─ THEN user realizes blocking is happening
+    └─ But it's been 5 minutes - looks "delayed"
+
+    REASON: BUG #1 (no UI feedback when blocking starts)
+
+
+BUG #4: CAN'T CREATE NEW SFS - ERROR "ALREADY ACTIVE" ❌
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Scenario: User tries to create a second SFS while one is blocked
+
+    ❌ ERROR: "Cannot activate: SFS already active"
+    ✅ BLOCKING: Working correctly (session is active)
+
+    ROOT CAUSE: In activateSessionNow():
+    │
+    ├─ let (canActivate, reason) = canActivateSFS()
+    │
+    └─ canActivateSFS() checks:
+       │
+       ├─ Check 1: isPremium? If yes, allow
+       │
+       ├─ Check 2: Daily limit?
+       │  (free users only)
+       │
+       └─ BUT: Doesn't check canActivateSFS() at line 348!
+          
+          MISSING:
+          ├─ if activeSession != nil → return (false, "SFS already active")
+          └─ Current code relies on isSessionActive boolean
+             which might be:
+             ├─ False initially (set to true only in init)
+             ├─ Not updated when session promoted by extension
+             └─ Out of sync with actual activeSession object
+
+    FILES INVOLVED:
+    └─ /SFSManager.swift:272-298 (canActivateSFS method)
+
+
+BUG #5: CAN'T EDIT/DELETE SCHEDULED SFS ❌
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Observable: No swipe-to-delete, can't edit scheduled sessions
+
+    ROOT CAUSE:
+    ├─ ScheduledSFSListView is supposed to show all sessions
+    ├─ It should show edit/delete buttons
+    ├─ BUT: BUG #1 means active sessions aren't showing
+    ├─ So user can't see the session to delete it
+    └─ User sees empty list, no way to manage sessions
+
+    FILES INVOLVED:
+    └─ /ScheduledSFSListView.swift:29-38 (swipeActions)
+
+
+BUG #6: GHOST BLOCKING - APPS BLOCKED BUT NO UI ❌
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Observable: Apps blocked but no SFS shown, can't stop blocking
+
+    ROOT CAUSE: Combination of BUG #1-5
+    ├─ Session promoted by extension ✅
+    ├─ Apps blocked by extension ✅
+    ├─ Main app loaded active session ✅
+    ├─ BUT: UI doesn't display it (BUG #1)
+    ├─ User can't find the session to stop it
+    ├─ Can't create new SFS (BUG #4)
+    ├─ Apps stay blocked until:
+    │  ├─ Session time expires
+    │  ├─ User force-kills app and restarts
+    │  └─ OR extension unblocks (if crash recovery)
+    └─ User experience: "SFS broken, stuck blocking"
+
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+ROOT CAUSE DIAGRAM - HOW THEY CONNECT
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+TRIGGER: Extension promotes scheduled → active session
+
+        Extension:                           Main App:
+        ───────────────────────────────────────────────
+        intervalDidStart fires
+        at 2:00 PM
+            │
+            ├─ Save to sfsActiveSession.json
+            │
+            ├─ Delete from sfsScheduledSessions.json  ──────┐
+            │                                                 │
+            └─ Block apps ✅                                │
+                                                              │
+                                  When app launches at 2:05 PM:
+                                  │
+                                  ├─ Load sfsActiveSession.json ✅
+                                  │  activeSession = ABC-123 ✅
+                                  │
+                                  ├─ Load sfsScheduledSessions.json
+                                  │  scheduledSessions = [] <── BUG #3
+                                  │                              Empty because
+                                  │                              extension deleted it
+                                  │
+                                  ├─ Render UI
+                                  │  │
+                                  │  ├─ RomanTimerView.swift
+                                  │  │  Should show: active SFS
+                                  │  │  Actually shows: ??? (BUG #1)
+                                  │  │
+                                  │  ├─ ScheduledSFSListView.swift
+                                  │  │  Should show: active SFS + future SFS
+                                  │  │  Actually shows: nothing (BUG #1)
+                                  │  │
+                                  │  └─ No UI feedback → User thinks blocked
+                                  │     (BUG #2, #3)
+                                  │
+                                  ├─ User tries new SFS
+                                  │  canActivateSFS() doesn't check
+                                  │  activeSession object ✅
+                                  │  Only checks isSessionActive boolean
+                                  │  If boolean false → allows creation (BUG #4)
+                                  │
+                                  └─ Apps block but no UI
+                                     User can't manage session (BUG #6)
+
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+WHY ALL 6 ISSUES TRACE BACK TO 4 ROOT FAILURES
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+ROOT FAILURE #1: No Foreground Sync for Scheduled Sessions
+─────────────────────────────────────────────────────────────
+When app comes to foreground:
+├─ SFSManager.init() loads scheduledSessions ONCE
+├─ If extension modified the file, main app never reloads
+├─ Published property stays stale
+├─ UI doesn't refresh
+└─ Result: BUGS #1, #2, #3, #5, #6
+
+FILES:
+└─ /SFSManager.swift:210 (missing refresh)
+└─ /RomanTimerView.swift:85 (scenePhase not used for SFS)
+
+
+ROOT FAILURE #2: canActivateSFS doesn't check activeSession object
+──────────────────────────────────────────────────────────────────
+Current check:
+├─ Check isPremium → allow
+├─ Check daily limit → maybe block
+└─ MISSING: Check if activeSession != nil
+
+Should be:
+├─ if activeSession != nil → return (false, "SFS already active")
+├─ if dailyLimitReached → return (false, ...)
+└─ else → allow
+
+FILES:
+└─ /SFSManager.swift:272-298 (canActivateSFS method)
+└─ Result: BUG #4
+
+
+ROOT FAILURE #3: ScheduledSFSListView display logic is flawed
+──────────────────────────────────────────────────────────────
+Current logic:
+├─ Check if activeSession exists AND Date() >= startTime
+├─ Filter future sessions where Date() < startTime
+└─ Problem: Relies on startTime check, not on sfsManager.isSessionActive
+
+Should be:
+├─ Show activeSession if sfsManager.isSessionActive==true
+├─ Show future sessions if Date() < startTime
+└─ Handle the case where extension removed session from file
+
+FILES:
+└─ /ScheduledSFSListView.swift:48-72 (displaySessions computed property)
+└─ /ScheduledSFSListView.swift:64-72 (isSessionActive/isSessionFuture methods)
+└─ Result: BUG #1
+
+
+ROOT FAILURE #4: Extension changes not reflected in main app UI
+────────────────────────────────────────────────────────────────
+When extension modifies App Group files:
+├─ Main app doesn't get notified
+├─ Published properties don't update
+├─ Views show stale data
+└─ User sees ghost sessions or missing sessions
+
+Example timeline:
+├─ 0:00: User schedules SFS, UI shows "SCHEDULED"
+├─ 2:00: Extension promotes session
+├─ 2:00: Extension deletes from scheduledSessions.json
+├─ 2:05: User opens app
+├─ 2:05: Main app loads init but has stale scheduledSessions
+├─ 2:05: UI still thinks session is "scheduled" not "active"
+└─ Result: BUGS #1, #2, #3, #5, #6
+
+FILES:
+└─ Multiple (requires architecture fix)
+
+
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+VERIFICATION: WHAT'S ACTUALLY WORKING
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+✅ Extension session promotion logic (lines 538-572)
+✅ Storage functions all work correctly
+✅ Main app initial load of activeSession
+✅ ManagedSettings shields applied correctly
+✅ Apps actually blocked as expected
+✅ Break system works (when session visible)
+
+BROKEN COMPONENTS:
+❌ Foreground sync of scheduled sessions
+❌ canActivateSFS check for existing sessions
+❌ ScheduledSFSListView display logic
+❌ No notification when session state changes
+❌ Published property staleness on extension changes
+
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+CONCLUSION: The system works perfectly UNTIL the user opens the app.
+Then it breaks because the main app doesn't know the extension changed the file system.
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
