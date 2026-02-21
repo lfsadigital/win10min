@@ -3,17 +3,17 @@
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Win 10min - Focus Timer & App Blocker for iPhone</title>
-      <meta name="description" content="All you need is to win 10 minutes. If you can focus for 10 minutes, you can build your Empire.">
-      <meta name="keywords" content="focus timer, pomodoro app, app blocker, screen time, productivity, iOS app, iPhone, concentration, study timer">
+      <title>Win 10min - Focus Timer, App Blocker & Empire Builder for iPhone</title>
+      <meta name="description" content="All you need is to win 10 minutes. Focus for 10 minutes, block distracting apps, conquer regions on a real map, and build your Roman Empire.">
+      <meta name="keywords" content="focus timer, pomodoro app, app blocker, screen time, productivity, iOS app, iPhone, concentration, study timer, empire builder, gamification, leaderboard">
 
       <!-- Favicon -->
       <link rel="icon" type="image/png" href="/roman-character.png">
       <link rel="apple-touch-icon" href="/roman-character.png">
 
       <!-- Open Graph / Facebook -->
-      <meta property="og:title" content="Win 10min - Focus Timer & App Blocker for iPhone">
-      <meta property="og:description" content="All you need is to win 10 minutes. If you can focus for 10 minutes, you can build your Empire.">
+      <meta property="og:title" content="Win 10min - Focus Timer, App Blocker & Empire Builder">
+      <meta property="og:description" content="All you need is to win 10 minutes. Focus, block apps, conquer regions, and build your Roman Empire.">
       <meta property="og:type" content="website">
       <meta property="og:url" content="https://win10minutes.app">
       <meta property="og:image" content="https://win10minutes.app/og-image.png">
@@ -23,8 +23,8 @@
 
       <!-- Twitter Card -->
       <meta name="twitter:card" content="summary_large_image">
-      <meta name="twitter:title" content="Win 10min - Focus Timer & App Blocker for iPhone">
-      <meta name="twitter:description" content="All you need is to win 10 minutes. If you can focus for 10 minutes, you can build your Empire.">
+      <meta name="twitter:title" content="Win 10min - Focus Timer, App Blocker & Empire Builder">
+      <meta name="twitter:description" content="All you need is to win 10 minutes. Focus, block apps, conquer regions, and build your Roman Empire.">
       <meta name="twitter:image" content="https://win10minutes.app/og-image.png">
       <meta name="twitter:image:alt" content="Win 10min Roman Character">
 
@@ -195,9 +195,9 @@
               transform: scale(1.05);
           }
 
-          /* Scroll hint - appears on larger screens */
+          /* Scroll hint */
           .screenshots::after {
-              content: '← Scroll to see more →';
+              content: '\2190 Scroll to see more \2192';
               display: block;
               text-align: center;
               color: var(--roman-gold);
@@ -227,7 +227,7 @@
           /* Features */
           .features {
               padding: 5rem 2rem;
-              background: var(--marble-black);
+              background: linear-gradient(180deg, var(--dark-stone) 0%, var(--marble-black) 100%);
           }
 
           .container {
@@ -245,11 +245,48 @@
               font-weight: 900;
           }
 
+          .features-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+              gap: 2rem;
+              max-width: 1000px;
+              margin: 0 auto;
+          }
+
+          .feature-card {
+              background: var(--marble-black);
+              border: 1px solid rgba(212, 175, 55, 0.2);
+              border-radius: 12px;
+              padding: 2rem;
+              text-align: center;
+              transition: border-color 0.3s ease, transform 0.3s ease;
+          }
+
+          .feature-card:hover {
+              border-color: var(--roman-gold);
+              transform: translateY(-4px);
+          }
+
+          .feature-icon {
+              font-size: 2.5rem;
+              margin-bottom: 1rem;
+          }
+
+          .feature-card h3 {
+              color: var(--roman-gold);
+              margin-bottom: 0.75rem;
+              font-size: 1.2rem;
+          }
+
+          .feature-card p {
+              opacity: 0.8;
+              font-size: 0.95rem;
+          }
 
           /* How it Works */
           .how-it-works {
               padding: 5rem 2rem;
-              background: linear-gradient(180deg, var(--marble-black) 0%, var(--dark-stone) 100%);
+              background: var(--marble-black);
           }
 
           .steps {
@@ -298,7 +335,7 @@
           /* Pricing */
           .pricing {
               padding: 5rem 2rem;
-              background: var(--marble-black);
+              background: linear-gradient(180deg, var(--marble-black) 0%, var(--dark-stone) 100%);
           }
 
           .pricing-cards {
@@ -398,7 +435,7 @@
           }
 
           .premium-features li:before {
-              content: "✓ ";
+              content: "\2713 ";
               color: var(--laurel-green);
               font-weight: bold;
               margin-right: 0.5rem;
@@ -407,7 +444,7 @@
           /* Support Section */
           .support {
               padding: 5rem 2rem;
-              background: linear-gradient(180deg, var(--marble-black) 0%, var(--dark-stone) 100%);
+              background: var(--marble-black);
           }
 
           .support-content {
@@ -525,49 +562,85 @@
                   <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
               </a>
               <p class="description">
-                  If you can focus for 10 minutes, you can build your Empire. That's it!
+                  If you can focus for 10 minutes, you can build your Empire.
               </p>
           </div>
       </section>
 
-     <!-- App Screenshots -->
-  <section class="screenshots">
-      <div class="container">
-          <h2 class="section-title">EXPERIENCE THE APP</h2>
-          <div class="screenshots-grid">
-      <div class="screenshot-item">
-          <img src="screenshot2.png" alt="Win 10 Minutes">
-      </div>
-      <div class="screenshot-item">
-          <img src="screenshot-focus.png" alt="Focus for 10 Minutes">
-      </div>
-              <div class="screenshot-item">
-                  <img src="screenshot4.png" alt="Victory Screen">
-              </div>
-              <div class="screenshot-item">
-                  <img src="screenshot5.png" alt="Track Your Focus">
-              </div>
-              <div class="screenshot-item">
-                  <img src="screenshot1.png" alt="Build Your Empire">
-              </div>
-              <div class="screenshot-item">
-                  <img src="screenshot6.png" alt="AI Task Breakdown">
-              </div>
-              <div class="screenshot-item">
-                  <img src="screenshot7.png" alt="Plan Tasks Ahead">
-              </div>
-              <div class="screenshot-item">
-                  <img src="screenshot8.png" alt="Review Your Tasks">
-              </div>
-              <div class="screenshot-item">
-                  <img src="screenshot-sfs.png" alt="Super Focus Sessions">
-              </div>
-              <div class="screenshot-item">
-                  <img src="screenshot-blocks.png" alt="Block Schedules">
+      <!-- App Screenshots -->
+      <section class="screenshots">
+          <div class="container">
+              <h2 class="section-title">EXPERIENCE THE APP</h2>
+              <div class="screenshots-grid">
+                  <div class="screenshot-item">
+                      <img src="screenshots/focus-timer.png" alt="Focus Timer - March to Victory">
+                  </div>
+                  <div class="screenshot-item">
+                      <img src="screenshots/empire-map.png" alt="Empire Map - Conquer Regions">
+                  </div>
+                  <div class="screenshot-item">
+                      <img src="screenshots/stats-success.png" alt="Stats - Success Rate & Health Index">
+                  </div>
+                  <div class="screenshot-item">
+                      <img src="screenshots/leaderboard.png" alt="Arena Leaderboard - Gloria Et Honorem">
+                  </div>
+                  <div class="screenshot-item">
+                      <img src="screenshots/block-schedules.png" alt="Block Schedules - Automated App Blocking">
+                  </div>
+                  <div class="screenshot-item">
+                      <img src="screenshots/stats-charts.png" alt="Focus Session Charts & Insights">
+                  </div>
+                  <div class="screenshot-item">
+                      <img src="screenshots/heatmap.png" alt="Activity Heatmap & Milestones">
+                  </div>
+                  <div class="screenshot-item">
+                      <img src="screenshots/empire-timeline.png" alt="Empire Growth Timeline">
+                  </div>
+                  <div class="screenshot-item">
+                      <img src="screenshots/anti-quit.png" alt="Anti-Quit - Type to Cancel">
+                  </div>
               </div>
           </div>
-      </div>
-  </section>
+      </section>
+
+      <!-- Features -->
+      <section class="features">
+          <div class="container">
+              <h2 class="section-title">KEY FEATURES</h2>
+              <div class="features-grid">
+                  <div class="feature-card">
+                      <div class="feature-icon">&#9201;</div>
+                      <h3>Focus Timer</h3>
+                      <p>Start a 10-minute session, block distracting apps automatically, and earn buildings for your Roman city.</p>
+                  </div>
+                  <div class="feature-card">
+                      <div class="feature-icon">&#127758;</div>
+                      <h3>Empire Map</h3>
+                      <p>Conquer real regions on an interactive map. Expand from Italia to Britannia, Dacia, Persia, and beyond.</p>
+                  </div>
+                  <div class="feature-card">
+                      <div class="feature-icon">&#127942;</div>
+                      <h3>Arena Leaderboard</h3>
+                      <p>Compete in the Arena. Climb Bronze, Silver, and Gold tiers. See how your focus ranks against other Romans.</p>
+                  </div>
+                  <div class="feature-card">
+                      <div class="feature-icon">&#128683;</div>
+                      <h3>Block Schedules</h3>
+                      <p>Set automated blocking schedules like "No Phone Before Bed" or "Morning Ritual" that activate on their own.</p>
+                  </div>
+                  <div class="feature-card">
+                      <div class="feature-icon">&#128170;</div>
+                      <h3>Anti-Quit System</h3>
+                      <p>Want to give up? You'll wait 15 seconds, then type "I let temptation win this battle." Designed to keep you going.</p>
+                  </div>
+                  <div class="feature-card">
+                      <div class="feature-icon">&#128202;</div>
+                      <h3>Deep Analytics</h3>
+                      <p>Activity heatmaps, focus charts, health index, milestones, building quality stats, and daily progress tracking.</p>
+                  </div>
+              </div>
+          </div>
+      </section>
 
       <!-- How It Works -->
       <section class="how-it-works">
@@ -577,22 +650,22 @@
                   <div class="step">
                       <div class="step-number">1</div>
                       <h3>Set Your Task</h3>
-                      <p>Choose what you want to work on</p>
+                      <p>Choose what you want to focus on or let AI break down your goal</p>
                   </div>
                   <div class="step">
                       <div class="step-number">2</div>
-                      <h3>Start Timer</h3>
-                      <p>Apps automatically block when you begin</p>
+                      <h3>March to Victory</h3>
+                      <p>Apps automatically block when you begin your session</p>
                   </div>
                   <div class="step">
                       <div class="step-number">3</div>
                       <h3>Stay Focused</h3>
-                      <p>Work without distractions until timer ends</p>
+                      <p>The anti-quit system keeps you accountable until the timer ends</p>
                   </div>
                   <div class="step">
                       <div class="step-number">4</div>
-                      <h3>Build Empire</h3>
-                      <p>Earn a building for your Roman city</p>
+                      <h3>Build Your Empire</h3>
+                      <p>Earn buildings, conquer regions, and climb the leaderboard</p>
                   </div>
               </div>
           </div>
@@ -629,33 +702,37 @@
                       <li>AI Task Breakdowns - AI-powered goal breakdown into 10-minute tasks</li>
                       <li>Custom App Selection - Choose which apps to block (Free: blocks ALL)</li>
                       <li>Custom Session Durations - 5, 10, or 15 minutes (Free: 10 min only)</li>
-                      <li>Advanced Stats & Analytics - Detailed charts, trends, and insights</li>
-                      <li>Legendary Buildings & Cities - Colosseum, Pantheon, Circus Maximus + Greece, Mesopotamia, Dacia, Carthago, Syria, Persia</li>
+                      <li>Empire Map & Conquests - Conquer regions across the ancient world</li>
+                      <li>Arena Leaderboard - Compete with others across Bronze, Silver, and Gold tiers</li>
+                      <li>Block Schedules - Set automated app blocking on a schedule</li>
+                      <li>Super Focus Sessions - Chain multiple tasks into one focused session</li>
+                      <li>Advanced Stats & Analytics - Heatmaps, charts, health index, and milestones</li>
+                      <li>Legendary Buildings & Cities - Colosseum, Pantheon, Circus Maximus and more</li>
                       <li>Focus Music - Background music to help you concentrate</li>
                       <li>Personal Handle & City Name - Customize your @username and empire name</li>
-                      <li>CSV Export & More - Export stats, session history, task categories, and more</li>
+                      <li>CSV Export & More - Export stats, session history, and task categories</li>
                   </ul>
               </div>
           </div>
       </section>
 
       <!-- Support Section -->
-  <section class="support" id="support">
-      <div class="container">
-          <h2 class="section-title">SUPPORT</h2>
-          <div class="support-content">
-              <p style="opacity: 0.9; font-size: 1.1rem; margin-bottom: 1rem;">
-                  Need help? Have questions? We're here for you.
-              </p>
-              <a href="mailto:win10minapp@gmail.com" class="support-email">
-                  ✉️ win10minapp@gmail.com
-              </a>
-              <p style="opacity: 0.7; font-size: 0.9rem;">
-                  We typically respond within 24 hours.
-              </p>
+      <section class="support" id="support">
+          <div class="container">
+              <h2 class="section-title">SUPPORT</h2>
+              <div class="support-content">
+                  <p style="opacity: 0.9; font-size: 1.1rem; margin-bottom: 1rem;">
+                      Need help? Have questions? We're here for you.
+                  </p>
+                  <a href="mailto:win10minapp@gmail.com" class="support-email">
+                      win10minapp@gmail.com
+                  </a>
+                  <p style="opacity: 0.7; font-size: 0.9rem;">
+                      We typically respond within 24 hours.
+                  </p>
+              </div>
           </div>
-      </div>
-  </section>
+      </section>
 
       <!-- Footer -->
       <footer>
@@ -673,8 +750,8 @@
                   Win 10min is a focus and productivity app. Requires iOS 16.0 or later.<br>
                   Screen Time permissions required for app blocking functionality.
               </p>
-              <p style="margin-top: 1rem;">&copy; 2024 LFSA DIGITAL LLC. All rights reserved.</p>
-              <p class="latin-motto">VENI · VIDI · VICI</p>
+              <p style="margin-top: 1rem;">&copy; 2025 LFSA DIGITAL LLC. All rights reserved.</p>
+              <p class="latin-motto">VENI &middot; VIDI &middot; VICI</p>
           </div>
       </footer>
   </body>
