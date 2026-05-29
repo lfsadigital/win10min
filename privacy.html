@@ -107,144 +107,84 @@
           <a href="index.html" class="back-link">← Back to Home</a>
 
           <h1>Privacy Policy</h1>
-          <p class="last-updated"><strong>Last Updated:</strong> October 15, 2024</p>
+          <p class="last-updated"><strong>Last Updated:</strong> May 29, 2026</p>
 
           <h2>Overview</h2>
-          <p>Win 10 Minutes ("we", "our", or "the app") is committed to protecting your privacy. This Privacy Policy explains how we handle information when you use our iOS
-  application.</p>
+          <p>Win 10 Minutes ("we", "our", or "the app") is committed to protecting your privacy. This Privacy Policy explains what information the app handles, where it is stored, and who can see it. By design, most of your data stays on your device. A few optional, opt-in features (the Arena leaderboard, Groups, the Guardian accountability partner, and Focus Reports) store and share a limited amount of data through Apple iCloud so that the specific people you choose to connect with can see it.</p>
 
-          <h2>Information We Collect</h2>
+          <h2>Information We Handle and Where It Is Stored</h2>
 
-          <h3>Information Stored Locally</h3>
-          <p>All data created and used by Win 10 Minutes is stored locally on your device:</p>
+          <h3>1. Stored only on your device (default)</h3>
+          <p>By default the following stays on your device (and in your personal iCloud backup if you enable iCloud Backup):</p>
           <ul>
               <li>Focus session history and statistics</li>
-              <li>Building and city progress</li>
-              <li>Empire conquest progress</li>
+              <li>Building, city, and empire progress</li>
               <li>Settings and preferences</li>
               <li>Task names and completion status</li>
-              <li>User handle (e.g., @BuildWithLuiz)</li>
+              <li>Your chosen user handle (e.g., @BuildWithLuiz), until you opt into a feature that shares it</li>
           </ul>
 
-          <h3>AI Task Breakdown (Premium Feature)</h3>
-          <p>When you use the AI Task Breakdown feature:</p>
+          <h3>2. Stored in Apple iCloud (CloudKit) — only if you use the social / accountability features</h3>
+          <p>These features are optional. If you turn one on, a limited set of data is stored in Apple's iCloud (CloudKit) and made visible to the specific people you connect with. We do not operate our own database of this content; it is stored in iCloud and associated with your iCloud account identifier.</p>
           <ul>
-              <li><strong>What is sent:</strong> The task/goal text you enter</li>
-              <li><strong>Where it goes:</strong> OpenAI's API to generate actionable subtasks</li>
-              <li><strong>What is NOT sent:</strong> No personal information, user identifiers, or device data</li>
-              <li><strong>Storage:</strong> We do not store your task descriptions on our servers</li>
-              <li><strong>Your control:</strong> This feature is optional and only activated when you explicitly tap "AI TASK BREAKDOWN"</li>
+              <li><strong>Arena leaderboard and Groups (optional):</strong> your chosen display handle and focus statistics (such as total focus time, number of sessions, success rate, and buildings) so you can be ranked among other players or within a private group you create or join.</li>
+              <li><strong>Guardian accountability partner (optional, Premium):</strong> the pairing between you and the partner you invite, your "give up / ask for mercy" requests, and — only if you and your partner agreed to a photo "dare" — the photo you choose to submit as proof. This is shared with your paired partner.</li>
+              <li><strong>Focus Reports (optional, Premium, OFF by default):</strong> a weekly summary of your focus statistics — focus time, number of sessions, completion percentage, current streak, and a 7-day activity overview — shared with the one partner you are paired with. This is opt-in: it stays off until you enable "Share my focus report," and turning it back off deletes the shared copies. No raw Screen Time or per-app usage data is ever shared.</li>
+          </ul>
+          <p>You stay in control: you can leave the Arena/Groups, unpair your Guardian, and turn Focus Report sharing off at any time.</p>
+
+          <h3>3. Push notifications (Google Firebase Cloud Messaging)</h3>
+          <p>To deliver Guardian alerts to your partner's lock screen (for example, "your partner is asking to give up"), the app registers a push notification token with Apple Push Notification service and Google's Firebase Cloud Messaging. This token is stored (in iCloud) and used by our notification-relay function to send the alert. The notification contains your display handle and the type of request only; it does not contain your focus content, statistics, or photos. See Google's privacy information: <a href="https://firebase.google.com/support/privacy" style="color: var(--roman-gold);">https://firebase.google.com/support/privacy</a></p>
+
+          <h3>4. AI Task Breakdown (Premium, optional)</h3>
+          <p>When you use AI Task Breakdown, the task/goal text you type is sent to OpenAI's API to generate subtasks.</p>
+          <ul>
+              <li><strong>What is sent:</strong> only the task/goal text you enter. No personal identifiers or device data.</li>
+              <li><strong>Storage:</strong> we do not store your task text on our servers.</li>
+              <li><strong>Training:</strong> OpenAI does not use API data to train its models, per their <a href="https://openai.com/policies/api-data-usage-policies" style="color: var(--roman-gold);">API data usage policy</a>.</li>
+              <li><strong>Your control:</strong> optional; data is only sent when you tap "AI Task Breakdown." You can enter tasks manually instead.</li>
           </ul>
 
-          <h3>Information We Do NOT Collect</h3>
-          <p>We do not collect, transmit, or store personal information on external servers. This includes:</p>
+          <h3>5. Screen Time (on-device)</h3>
+          <p>The app uses Apple's Screen Time / Family Controls API to block distracting apps during focus sessions and Daily Limits. This is processed on-device by iOS and does not transmit your app-usage data to us or any third party.</p>
+
+          <h3>6. In-App Purchases</h3>
+          <p>Payments are processed entirely by Apple through their secure system. We never have access to your payment card information.</p>
+
+          <h2>Information We Do NOT Collect</h2>
           <ul>
-              <li>No personal identification information</li>
+              <li>No advertising identifiers and no third-party advertising</li>
+              <li>No third-party analytics or behavioral tracking SDKs</li>
               <li>No location data</li>
-              <li>No contact information</li>
-              <li>No analytics or tracking data beyond local app usage</li>
-              <li>No advertising identifiers</li>
+              <li>No access to your contacts</li>
+              <li>We do not sell your data. We share data only with (a) the specific players or partners you choose to connect with, and (b) the service providers listed above (Apple iCloud, Google Firebase for push delivery, and OpenAI for the optional AI feature), strictly to provide the requested feature.</li>
           </ul>
 
-          <h2>Data Storage</h2>
-          <p>All app data is stored using iOS's local storage (UserDefaults and local files). This data:</p>
+          <h2>Data Storage and Security</h2>
           <ul>
-              <li>Remains on your device</li>
-              <li>Is included in your iCloud backup if you have iCloud Backup enabled</li>
-              <li>Can be deleted by uninstalling the app</li>
+              <li>On-device data is protected by iOS's built-in security.</li>
+              <li>iCloud (CloudKit) data is stored in Apple's iCloud, protected by Apple's security, and visible only to the specific people you connect with for that feature.</li>
+              <li>Data sent to Google Firebase (push token) and OpenAI (AI text) is transmitted securely over HTTPS.</li>
           </ul>
+          <p>We recommend using a device passcode, keeping iOS updated, and enabling iCloud Backup for recovery.</p>
 
-          <h2>Notifications</h2>
-          <p>The app uses local notifications to remind you about:</p>
+          <h2>Your Rights and Choices</h2>
           <ul>
-              <li>Focus session status</li>
-              <li>Break reminders</li>
-              <li>Session completion</li>
+              <li>Delete all on-device data by uninstalling the app, or reset data within Settings.</li>
+              <li>Leave the Arena/Groups, unpair your Guardian, or turn off Focus Report sharing at any time (turning sharing off deletes the shared report copies).</li>
+              <li>Disable notifications in iOS Settings.</li>
+              <li>Choose not to use AI Task Breakdown.</li>
+              <li>Contact us to request information about, or deletion of, data associated with your account.</li>
           </ul>
-          <p>These notifications are scheduled locally and do not involve any external servers.</p>
-
-          <h2>Third-Party Services</h2>
-
-          <h3>OpenAI API (Premium Feature Only)</h3>
-          <p>We use OpenAI's API exclusively for the AI Task Breakdown feature:</p>
-
-          <p><strong>What data is sent:</strong></p>
-          <ul>
-              <li>Only the task/goal text you enter when using AI Task Breakdown</li>
-              <li>No personal information or user identifiers</li>
-          </ul>
-
-          <p><strong>How it's used:</strong></p>
-          <ul>
-              <li>Solely to generate task breakdowns for you</li>
-              <li>OpenAI processes the request according to their API Data Usage Policy</li>
-              <li>OpenAI does not use API data to train their models (per their API policy)</li>
-          </ul>
-
-          <p><strong>Third-party privacy policy:</strong></p>
-          <ul>
-              <li>OpenAI: <a href="https://openai.com/policies/api-data-usage-policies" style="color: 
-  var(--roman-gold);">https://openai.com/policies/api-data-usage-policies</a></li>
-          </ul>
-
-          <p><strong>Your control:</strong></p>
-          <ul>
-              <li>This feature is optional (Premium users only)</li>
-              <li>Data is only sent when you explicitly tap "AI TASK BREAKDOWN"</li>
-              <li>You can choose to enter tasks manually instead</li>
-          </ul>
-
-          <h3>Screen Time API</h3>
-          <p>The app uses Apple's Screen Time API to block distracting apps during focus sessions. This is a local iOS feature and does not transmit data externally.</p>
-
-          <h3>In-App Purchases</h3>
-          <p>Payment processing is handled entirely by Apple through their secure payment system. We never have access to your payment card information.</p>
 
           <h2>Children's Privacy</h2>
-          <p>The app does not knowingly collect personal information from children under 13. The app is suitable for all ages.</p>
-
-          <h2>Data Security</h2>
-          <p>Since most data is stored locally on your device, security is managed by iOS's built-in security features. For data sent to OpenAI (AI feature only):</p>
-          <ul>
-              <li>Transmitted securely via HTTPS</li>
-              <li>Not stored on our servers</li>
-              <li>Processed according to OpenAI's API data policy</li>
-          </ul>
-
-          <p>We recommend:</p>
-          <ul>
-              <li>Using a device passcode</li>
-              <li>Keeping your iOS updated</li>
-              <li>Using iCloud Backup for data recovery</li>
-          </ul>
-
-          <h2>Your Rights</h2>
-          <p>You have complete control over your data:</p>
-          <ul>
-              <li>Delete all app data by uninstalling the app</li>
-              <li>Reset data within the app through Settings</li>
-              <li>Disable notifications in iOS Settings</li>
-              <li>Choose not to use AI Task Breakdown feature</li>
-              <li>Request information about data sent to OpenAI by contacting us</li>
-          </ul>
+          <p>Win 10 Minutes is intended for a general audience. Some features (such as a parent acting as a child's Guardian, or receiving a child's Focus Report) are designed to be set up by a parent or guardian. We do not knowingly collect personal information from children under 13 beyond the minimal, opt-in data described above that a user or their parent chooses to share. If you believe a child has provided information without parental consent, contact us and we will delete it.</p>
 
           <h2>California Privacy Rights</h2>
-          <p>If you are a California resident, you have the right to:</p>
-          <ul>
-              <li>Know what personal information is collected</li>
-              <li>Request deletion of your personal information</li>
-              <li>Opt-out of sale of personal information (we do not sell data)</li>
-          </ul>
+          <p>If you are a California resident, you have the right to know what personal information is collected, request deletion of your personal information, and opt out of the sale of personal information (we do not sell data).</p>
 
-          <h2>European Union Users</h2>
-          <p>If you are in the EU, you have rights under GDPR:</p>
-          <ul>
-              <li>Right to access your data</li>
-              <li>Right to rectification</li>
-              <li>Right to erasure</li>
-              <li>Right to data portability</li>
-          </ul>
-          <p>Since data is stored locally on your device, you have full control through app settings and device management.</p>
+          <h2>European Union Users (GDPR)</h2>
+          <p>If you are in the EU, you have the rights to access, rectification, erasure, and data portability. Because most data is stored on your device or in your own iCloud, you control it through the app and your device/iCloud settings; contact us for requests involving data shared through the optional features.</p>
 
           <h2>Changes to This Policy</h2>
           <p>We may update this Privacy Policy from time to time. Updates will be posted with app updates, and the "Last Updated" date will be revised.</p>
@@ -253,17 +193,18 @@
           <p>If you have questions about this Privacy Policy, please contact us at:</p>
           <ul>
               <li>Email: <a href="mailto:luiz@lfsadigital.com" style="color: var(--roman-gold);">luiz@lfsadigital.com</a></li>
-              <li>Website: <a href="https://lfsadigital.github.io/win10min/" style="color: var(--roman-gold);">https://lfsadigital.github.io/win10min/</a></li>
+              <li>Website: <a href="https://win10minutes.app" style="color: var(--roman-gold);">https://win10minutes.app</a></li>
           </ul>
 
           <div class="summary-box">
               <h2>Summary of Data Practices</h2>
               <ul style="margin-bottom: 0;">
-                  <li>✅ Most data stored locally on your device</li>
-                  <li>✅ AI feature sends task descriptions to OpenAI (optional, Premium only)</li>
-                  <li>❌ No personal information collected or stored on our servers</li>
-                  <li>❌ No tracking or analytics sent to external services</li>
-                  <li>❌ No advertising or data selling</li>
+                  <li>✅ Most data stays on your device</li>
+                  <li>✅ Optional social features (Arena, Groups, Guardian, Focus Reports) store limited data in your Apple iCloud, visible only to people you choose</li>
+                  <li>✅ Guardian push uses Google Firebase to deliver notifications</li>
+                  <li>✅ AI feature sends task text to OpenAI (optional, Premium only)</li>
+                  <li>❌ No third-party analytics, tracking, or advertising</li>
+                  <li>❌ No location or contacts access, and we never sell your data</li>
               </ul>
           </div>
       </div>
