@@ -1,0 +1,11 @@
+{
+  "version": "0.16.2",
+  "build": "19",
+  "architecture": "arm64",
+  "minimumMacOS": "26.0",
+  "sha256": "710755aa576c762263548c4a82b149a99cbf3332b4e42d72c4c6c90d93e2f0a5",
+  "notarized": true,
+  "crossMachineTest": "not yet performed",
+  "pluginVersion": "0.2.9",
+  "filename": "Win10min-Mac-0.16.2-arm64-notarized.zip"
+}
