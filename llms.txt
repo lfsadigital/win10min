@@ -11,6 +11,9 @@
 - [Privacy policy](https://win10minutes.app/privacy): published data-handling policy.
 - [Terms of use](https://win10minutes.app/terms): published terms.
 
+- [Mac focus timer setup](https://win10minutes.app/guides/mac-focus-timer/): installation, optional local ChatGPT planning, app hiding and troubleshooting.
+- [iPhone focus and App Limits setup](https://win10minutes.app/guides/iphone-focus-and-app-limits/): Screen Time permissions, focus sessions, Daily App Limits and purchase restoration.
+
 ## Platform boundaries
 
 The iPhone app uses Apple Screen Time app blocking and includes empire campaigns, focus statistics and Arena. It is free to download with in-app purchases; local prices and included features are shown by Apple and the app.
