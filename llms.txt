@@ -1,0 +1,20 @@
+# Win10min — Win 10 Minutes
+
+> Win10min is a gamified focus timer for iPhone and a separate native Mac beta. Completed focus sessions contribute to Roman progress. The apps have different features; progress, settings and purchases do not sync.
+
+## Official product information
+
+- [Win10min homepage](https://win10minutes.app/): current downloads, device requirements, setup questions and platform differences.
+- [Ten-minute focus guide](https://win10minutes.app/guides/ten-minute-focus/): a practical routine, iPhone Screen Time setup, Mac app hiding and optional local planning.
+- [iPhone App Store listing](https://apps.apple.com/app/id6751601664): current iPhone release, compatibility and in-app purchase information.
+- [Mac release metadata](https://win10minutes.app/downloads/release.json): published native Mac beta version and download checksum.
+- [Privacy policy](https://win10minutes.app/privacy): published data-handling policy.
+- [Terms of use](https://win10minutes.app/terms): published terms.
+
+## Platform boundaries
+
+The iPhone app uses Apple Screen Time app blocking and includes empire campaigns, focus statistics and Arena. It is free to download with in-app purchases; local prices and included features are shown by Apple and the app.
+
+The native Mac beta requires Apple Silicon (M1 or newer) and macOS 26 or later. It hides app windows, saves Roman progress and has an optional local planning connection in compatible desktop Work/Codex hosts. It does not block websites, lock applications, support Intel or Windows, or provide the iPhone Arena. The app bundle is named Win10min Preview.app. ChatGPT web and mobile do not support this local connection.
+
+The timer records time, not proof of task completion. No medical outcomes, guaranteed productivity gains, rankings or review ratings are claimed here. Unreleased iPhone code is not a public feature specification.
