@@ -21,3 +21,5 @@ The iPhone app uses Apple Screen Time app blocking and includes empire campaigns
 The native Mac beta requires Apple Silicon (M1 or newer) and macOS 26 or later. It hides app windows, saves Roman progress and has an optional local planning connection in compatible desktop Work/Codex hosts. It does not block websites, lock applications, support Intel or Windows, or provide the iPhone Arena. The app bundle is named Win10min Preview.app. ChatGPT web and mobile do not support this local connection.
 
 The timer records time, not proof of task completion. No medical outcomes, guaranteed productivity gains, rankings or review ratings are claimed here. Unreleased iPhone code is not a public feature specification.
+
+- [Free 10 minute timer](https://win10minutes.app/tools/10-minute-timer/): browser countdown with optional chime and focus view; no signup. No account sync, app blocking or saved session history.
