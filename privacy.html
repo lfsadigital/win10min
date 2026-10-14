@@ -109,7 +109,7 @@
           <a href="/" class="back-link">← Back to Home</a>
 
           <h1>Privacy Policy</h1>
-          <p class="last-updated"><strong>Last Updated:</strong> May 29, 2026</p>
+          <p class="last-updated"><strong>Last Updated:</strong> October 14, 2026</p>
 
           <h2>Overview</h2>
           <p>Win 10 Minutes ("we", "our", or "the app") is committed to protecting your privacy. This Privacy Policy explains what information the app handles, where it is stored, and who can see it. By design, most of your data stays on your device. A few optional, opt-in features (the Arena leaderboard, Groups, the Guardian accountability partner, and Focus Reports) store and share a limited amount of data through Apple iCloud so that the specific people you choose to connect with can see it.</p>
@@ -138,13 +138,13 @@
           <h3>3. Push notifications (Google Firebase Cloud Messaging)</h3>
           <p>To deliver Guardian alerts to your partner's lock screen (for example, "your partner is asking to give up"), the app registers a push notification token with Apple Push Notification service and Google's Firebase Cloud Messaging. This token is stored (in iCloud) and used by our notification-relay function to send the alert. The notification contains your display handle and the type of request only; it does not contain your focus content, statistics, or photos. See Google's privacy information: <a href="https://firebase.google.com/support/privacy" style="color: var(--roman-gold);">https://firebase.google.com/support/privacy</a></p>
 
-          <h3>4. AI Task Breakdown (Premium, optional)</h3>
-          <p>When you use AI Task Breakdown, the task/goal text you type is sent to OpenAI's API to generate subtasks.</p>
+          <h3>4. AI Task Breakdown (optional)</h3>
+          <p>When you request an AI task breakdown, your task or goal text is sent through our service on Google Cloud/Firebase to OpenAI to generate subtasks. You can enter tasks manually instead.</p>
           <ul>
-              <li><strong>What is sent:</strong> only the task/goal text you enter. No personal identifiers or device data.</li>
-              <li><strong>Storage:</strong> we do not store your task text on our servers.</li>
-              <li><strong>Training:</strong> OpenAI does not use API data to train its models, per their <a href="https://openai.com/policies/api-data-usage-policies" style="color: var(--roman-gold);">API data usage policy</a>.</li>
-              <li><strong>Your control:</strong> optional; data is only sent when you tap "AI Task Breakdown." You can enter tasks manually instead.</li>
+              <li><strong>Access and security:</strong> our service verifies App Store account and purchase information and app/device verification proofs to establish an AI account, check access, manage credits and prevent fraud or duplicate purchase redemption. These records are associated with a stable account identifier.</li>
+              <li><strong>Storage:</strong> our request ledger stores a fingerprint of your input rather than the raw goal text. Generated results can contain information from your input. Results are available for retries for up to 30 days; scheduled cleanup removes expired result content. Minimal request, purchase and anti-replay records can remain longer to prevent duplicate credit redemption.</li>
+              <li><strong>Provider:</strong> the goal text is processed by OpenAI. Provider handling and retention are governed by its applicable API data policies and our configured service settings. We do not claim zero provider retention.</li>
+              <li><strong>Deletion:</strong> the app's AI account deletion removes AI account data, saved request results and unused credits. A disabled-account marker and minimal anti-replay purchase records can remain. Deleting this account does not cancel an Apple subscription, erase local focus history or delete separate iCloud social/accountability data. Manage those features separately in the app and subscriptions through Apple.</li>
           </ul>
 
           <h3>5. Screen Time (on-device)</h3>
@@ -159,7 +159,7 @@
               <li>No third-party analytics or behavioral tracking SDKs</li>
               <li>No location data</li>
               <li>No access to your contacts</li>
-              <li>We do not sell your data. We share data only with (a) the specific players or partners you choose to connect with, and (b) the service providers listed above (Apple iCloud, Google Firebase for push delivery, and OpenAI for the optional AI feature), strictly to provide the requested feature.</li>
+              <li>We do not sell your data. We share data only with (a) the specific players or partners you choose to connect with, and (b) the service providers listed above (Apple iCloud, Google Firebase for push delivery and our AI service data, and OpenAI for the optional AI feature), strictly to provide the requested feature.</li>
           </ul>
 
           <h2>Data Storage and Security</h2>
