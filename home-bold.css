@@ -30,3 +30,8 @@ html{scrollbar-color:#857143 #0d0d0d}
 @media(prefers-contrast:more){.secondary{border-color:var(--ink)}.film-toggle{border-color:var(--ink)}.answers details{border-color:#bdb7a9}}
 
 @media(max-width:900px){.site-header nav a[href="/tools/10-minute-timer/"]{display:flex}}
+
+/* Goal guidance shares the focus section layout while keeping links readable. */
+.goal-invitation > div:first-child { max-width: 650px; }
+.goal-invitation > div:last-child { flex: 0 0 auto; align-items: flex-start; }
+@media (max-width: 900px) { .goal-invitation > div:last-child { flex-basis: auto; } }
